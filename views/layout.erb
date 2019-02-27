@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<header>
+		<nav>
+			here is the nav!
+		</nav>
+		<nav>
+	      <% if session[:logged_in] %>
+	        Logged in as <%= session[:username] %>
+	        <a href="/user/logout">Log out</a>
+	      <% else %>
+	        <a href="/user/login">Log in</a> | 
+	        <a href="/user/register">Register</a>
+	      <% end %>
+	    </nav>
+	</header> 
+	
+	<%= yield %>
+
+</body>
+</html>
