@@ -9,7 +9,7 @@ require './controllers/UserController'
 require './models/UserModel'
 
 
-# specify model routes
+# specify routes
 map '/' do
   run ApplicationController
 end
