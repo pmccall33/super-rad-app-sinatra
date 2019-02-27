@@ -10,13 +10,14 @@
 			here is the nav!
 		</nav>
 		<nav>
-	      <% if session[:logged_in] %>
-	        Logged in as <%= session[:username] %>
-	        <a href="/user/logout">Log out</a>
-	      <% else %>
-	        <a href="/user/login">Log in</a> | 
-	        <a href="/user/register">Register</a>
-	      <% end %>
+			<a href="/">Home</a> |
+			<% if session[:logged_in] %>
+			Logged in as <%= session[:username] %>
+			<a href="/user/logout">Log out</a>
+			<% else %>
+			<a href="/user/login">Log in</a> | 
+			<a href="/user/register">Register</a>
+		<% end %>
 	    </nav>
 	</header> 
 	
