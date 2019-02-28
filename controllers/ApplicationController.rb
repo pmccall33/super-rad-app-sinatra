@@ -49,10 +49,8 @@ class ApplicationController < Sinatra::Base
 	# 	"what about now"
 	# end
 
-	get '/' do
-		"reached ApplicationController, supersweet"
-
-		erb :home_index
+	get '/' do 
+		erb :home
 	end
 
 	get '/test' do	
