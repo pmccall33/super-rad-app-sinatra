@@ -1,3 +1,3 @@
-# class Image < ActiveRecord::Base
-# 	belongs to :user_path_step
-# end	
+class Image < ActiveRecord::Base 
+	has_many :tags
+end	
