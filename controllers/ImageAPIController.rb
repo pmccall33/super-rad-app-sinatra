@@ -1,14 +1,55 @@
 class ImageAPIController < ApplicationController 
 
-	before ['/new', '/submit'] do 
-		if not (session[:logged_in] and session[:is_admin])
-			session[:message] = "You must be logged in as an administrator to do that!"
-			redirect '/admin/login'
+	before do
+	    if request.post?
+			payload_body = request.body.read
+			@payload = JSON.parse(payload_body).symbolize_keys
+			puts "---------> Here's our payload"
+			pp @payload
+
 		end
+  	end
+
+  	get '/test' do
+		puts "TEst GET  ImageAPI route reached!!!!"
+		response = {
+			success: true,
+			code: 200,
+			status: "good",
+			message: "test Image route reached"
+		}
+		response.to_json
+  	end
+
+  	post '/test' do
+		puts "TEst POST ImageAPI route reached!!!!"
+		response = {
+			success: true,
+			code: 200,
+			status: "good",
+			message: "test route reached"
+		}
+		response.to_json
+  	end
+
+	get '/:id' do 
+		image = Image.find_by id: params[:id]				
+
+		@image_id = image.id
+		@image_url = image.image_url
+		
+		response = {
+			success: true,
+			code: 200,
+			status: "good",
+			message: "get rndom image route success",
+			image_id: @image_id,
+			image_url: @image_url
+		}
+		response.to_json
 	end
 
-
-	get '/' do 
+	get '/random' do 
 		# get a random image url from database  
 		rand_image = Image.all.sample 
 
@@ -19,9 +60,24 @@ class ImageAPIController < ApplicationController
 			@image_id = rand_image.id 
 		end 
 
-		erb :show_image
+		response = {
+			success: true,
+			code: 200,
+			status: "good",
+			message: "get rndom image route success",
+			image_id: @image_id,
+			image_url: @image_url
+		}
+		response.to_json
 	end
 
+
+	before ['/new', '/submit'] do 
+		if not (session[:logged_in] and session[:is_admin])
+			session[:message] = "You must be logged in as an administrator to do that!"
+			redirect '/admin/login'
+		end
+	end
 
 	get '/new' do 
 		erb :new_image 
