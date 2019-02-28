@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<header>
+		<nav>
+			here is the nav!
+		</nav>
+		<nav>
+			<a href="/">Home</a> |
+			<% if session[:logged_in] %>
+			Howdy, <%= session[:username] %>.
+			<a href="/user/logout">Log out</a>
+			<% else %>
+			<a href="/user/login">Log in</a> | 
+			<a href="/user/register">Register</a>
+		<% end %>
+	    </nav>
+	</header> 
+
+	<% if session[:message] %>
+		<h3><%= session[:message][:message] %></h3>
+	<% end %>
+	<% session[:message] = nil %>
+
+	<%= yield %>
+
+</body>
+</html>

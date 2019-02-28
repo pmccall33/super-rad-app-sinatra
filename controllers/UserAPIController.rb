@@ -31,11 +31,23 @@ class UserAPIController < ApplicationController
 		if user and user.authenticate(pw)
 			session[:logged_in] = true
 			session[:username] = user.username
+
+
+			# NEW CODE ===============
+			# CHECK IF ADMIN, SET PERMISSIONS VIA SESSIONS, CHANGE MESSAGE 
+			admin? = ""
+
+			if user.is_admin 
+				session[:is_admin] = true 
+				admin = "administrator: "
+			end
+			# NEW CODE ===============
+
 			response = {
 				success: true,
 				code: 200,
 				status: "good",
-				message: "Logged in as #{user.username}",
+				message: "Logged in as #{admin?}#{user.username}",
 				username: user.username
 			}
 			response.to_json

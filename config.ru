@@ -28,3 +28,7 @@ end
 map '/user_path' do
 	run UserPathStepController
 end
+
+map '/admin' do 
+	run AdminController 
+end

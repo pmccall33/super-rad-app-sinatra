@@ -1,0 +1,15 @@
+<h3> CHECK IMAGE </h3>
+
+<h4>Is this the image you wanted to add?</h4>
+
+<form action="/image/new" method="POST">
+	<input hidden name="image_url" value="<%=@image_url%>">
+	<button> YES </button> 
+</form>
+<br />
+<br />
+<form action="/image/new" method="GET">
+	<button> NO </button>
+</form>
+
+<img src="<%= @image_url %>"/>
