@@ -35,9 +35,10 @@ class AdminController < ApplicationController
 		admin = User.find_by username: params[:username]
 
 		pw = params[:password]
-
+		puts "params are hererererereereeeeee------"
+		puts "#{params}"
 		# if not (admin and admin.authenticate(pw) and admin.is_admin)
-		if not (admin and admin.password == pw and admin.is_admin)
+		if not (admin and admin.authenticate(pw) and admin.is_admin)
 			session[:message] = "Failed to log in as administrator"
 			redirect '/admin/login'
 		else 

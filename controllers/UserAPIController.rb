@@ -17,8 +17,8 @@ class UserAPIController < ApplicationController
 				code: 200,
 				status: "good",
 				message: "test route reached"
-			}
-			response.to_json
+		}
+		response.to_json
 
   	end
 
