@@ -22,6 +22,7 @@ class UserController < ApplicationController
 			user = User.new
 			user.username = params[:username]
 			user.password = params[:password]
+			user.is_admin = params[:is_admin]
 			user.save
 
 			session[:logged_in] = true
