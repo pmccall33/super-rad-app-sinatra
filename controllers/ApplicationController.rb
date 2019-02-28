@@ -4,19 +4,25 @@ class ApplicationController < Sinatra::Base
 
 	Dotenv.load
 
-	# enable :sessions
-		secret = ENV['SESSION_SECRET']
+	# envoronment config
+	require './config/environments'
 
-		use Rack::Session::Cookie, :key => 'rack.session',
-                            :path => '/',
-    						:secret => secret
+	# enable :sessions
+	secret = ENV['SESSION_SECRET']
+
+	"\nputs here is the seret"
+	puts secret
+
+	use Rack::Session::Cookie, :key => 'rack.session',
+                               :path => '/',
+    						   :secret => secret
 
     # Set up CORS
-		register Sinatra::CrossOrigin
+	register Sinatra::CrossOrigin
 
-		configure do
+	configure do
 		enable :cross_origin
-		end
+	end
 
 	set :allow_origin, :any
 	set :allow_methods, [:get, :post, :put, :options, :patch, :delete, :head]

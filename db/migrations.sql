@@ -20,3 +20,11 @@ CREATE TABLE tags(
 	image_id INTEGER REFERENCES images(id) ,
 	tag VARCHAR(32)
 );
+
+CREATE TABLE user_path_steps(
+	id SERIAL PRIMARY KEY,
+	user_id SERIAL REFERENCES users(id),
+	image_id SERIAL REFERENCES images(id),
+	path_id SERIAL,
+	previous_step SERIAL
+);
