@@ -1,4 +1,4 @@
-class ImageAPIController < ApplicationController 
+class ImageController < ApplicationController 
 
 	before ['/new', '/submit'] do 
 		if not (session[:logged_in] and session[:is_admin])
