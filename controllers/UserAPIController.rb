@@ -35,11 +35,11 @@ class UserAPIController < ApplicationController
 
 			# NEW CODE ===============
 			# CHECK IF ADMIN, SET PERMISSIONS VIA SESSIONS, CHANGE MESSAGE 
-			admin? = ""
+			admin_message = ""
 
 			if user.is_admin 
 				session[:is_admin] = true 
-				admin = "administrator: "
+				admin_message = "administrator: "
 			end
 			# NEW CODE ===============
 
@@ -47,7 +47,7 @@ class UserAPIController < ApplicationController
 				success: true,
 				code: 200,
 				status: "good",
-				message: "Logged in as #{admin?}#{user.username}",
+				message: "Logged in as #{admin_message}#{user.username}",
 				username: user.username
 			}
 			response.to_json
