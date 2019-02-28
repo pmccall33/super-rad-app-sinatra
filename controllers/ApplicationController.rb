@@ -33,7 +33,7 @@ class ApplicationController < Sinatra::Base
   	set :method_override, true
 
 	# firnd templates
-	set :views, File.expand_path('../../views', __FILE__)
+	set :views, File.expand_path('../../views/old_views', __FILE__)
 
 	# find static assets
 	set :public_dir, File.expand_path('../../public', __FILE__)

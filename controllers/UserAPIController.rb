@@ -32,7 +32,6 @@ class UserAPIController < ApplicationController
 			session[:logged_in] = true
 			session[:username] = user.username
 
-
 			# NEW CODE ===============
 			# CHECK IF ADMIN, SET PERMISSIONS VIA SESSIONS, CHANGE MESSAGE 
 			admin_message = ""
@@ -75,13 +74,15 @@ class UserAPIController < ApplicationController
 
 			session[:logged_in] = true
 			session[:username] = user.username
+			session[:is_admin] = user.is_admin
 
 			session[:message] = {
 				success: true,
 				code: 201,
 				status: "good",
 				message: "#{user.username} successfully created and loggin in.",
-				username: user.username
+				username: user.username,
+				is_admin: user.is_admin
 			}
 
 			response.to_json
