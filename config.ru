@@ -7,7 +7,7 @@ require './controllers/UserAPIController'
 require './controllers/UserPathStepController'
 require './controllers/ImageController'
 require './controllers/ImageAPIController'
-
+require './controllers/AdminController'
 
 #models
 require './models/UserModel'
