@@ -50,7 +50,7 @@ class ImageController < ApplicationController
 		puts "#{params} are herereereeee!"
 		unless (/[^A-z]+/ =~ params[:tag].strip)
 		# if (params[:tag] and params[:tag].length > 0)
-		console.log('this works')
+			puts "this works"
 			new_tag = Tag.new
 			new_tag.image_id = params[:id]
 			new_tag.image_tag = params[:tag]
