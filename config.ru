@@ -13,6 +13,7 @@ require './controllers/AdminController'
 require './models/UserModel'
 require './models/UserPathStepModel'
 require './models/ImageModel'
+require './models/TagModel'
 
 # specify routes
 map '/' do

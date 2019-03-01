@@ -47,13 +47,14 @@ class ImageController < ApplicationController
 
 
 	post '/:id' do 
-
+		puts "#{params} are herereereeee!"
 		if (params[:tag] and params[:tag].length > 0)
 			new_tag = Tag.new 
 			new_tag.image_id = params[:id] 
 			new_tag.image_tag = params[:tag] 
 
-			new_tag.save 
+			new_tag.save
+			session[:message] = "Successfully added your tag!" 
 		end 
 
 		redirect '/image'
