@@ -75,7 +75,7 @@ class ImageController < ApplicationController
 			if not (tag_candidate.length <= 1 || tag_candidate.length >= 15)
 				new_tag = Tag.new
 				new_tag.image_id = params[:id]
-				new_tag.tag = tag_candidate 
+				new_tag.image_tag = tag_candidate 
 
 				new_tag.save
 			end 
