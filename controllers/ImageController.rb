@@ -14,7 +14,18 @@ class ImageController < ApplicationController
 
 		@image_url = ""
 
+		# In one word, describe... 
+		prompts = [
+			"how this image makes you feel",
+			"the color you associate with this image",
+			"the layout or composition of the image"
+		]
+
+
+		@prompt = "Oops! Error loading image. Click SKIP and move on."
+
 		if rand_image
+			@prompt = prompts.sample 
 			@image_url = rand_image.image_url
 			@image_id = rand_image.id
 		end
