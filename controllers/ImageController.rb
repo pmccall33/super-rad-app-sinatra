@@ -47,18 +47,29 @@ class ImageController < ApplicationController
 
 
 	post '/:id' do
-		puts "#{params} are herereereeee!"
-		unless (/[^A-z]+/ =~ params[:tag].strip)
-		# if (params[:tag] and params[:tag].length > 0)
-			puts "this works"
-			new_tag = Tag.new
-			new_tag.image_id = params[:id]
-			new_tag.image_tag = params[:tag]
 
-			new_tag.save
-			session[:message] = "Successfully added your tag!"
+		puts "params are here: "
+		pp params
+
+		tag_candidate = params[:tag].downcase 
+
+		tag_candidate = tag_candidate.tr("\n", "")
+
+		unless (/[^A-z]+/ =~ params[:tag].strip)
+			puts "this works"
+
+			tag_candidate = tag_candidate.strip.downcase
+
+			if not (tag_candidate.length <= 1 || tag_candidate.length >= 15)
+				new_tag = Tag.new
+				new_tag.image_id = params[:id]
+				new_tag.image_tag = tag_candidate 
+
+				new_tag.save
+			end 
 		end
 
+		message[:session] = "Thank you for the input!"
 		redirect '/image'
 	end
 
