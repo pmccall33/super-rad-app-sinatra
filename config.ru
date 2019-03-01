@@ -5,6 +5,7 @@ require './controllers/ApplicationController'
 require './controllers/UserController'
 require './controllers/UserAPIController'
 require './controllers/UserPathStepController'
+require './controllers/UserPathStepAPIController'
 require './controllers/ImageController'
 require './controllers/ImageAPIController'
 require './controllers/AdminController'
@@ -40,6 +41,9 @@ map '/user_path' do
 	run UserPathStepController
 end
 
+map '/api/v1/user_path_step' do
+	run UserPathStepAPIController
+end
 map '/admin' do 
 	run AdminController 
 end
