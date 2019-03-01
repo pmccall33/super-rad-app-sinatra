@@ -14,13 +14,12 @@ class ImageController < ApplicationController
 
 		@image_url = ""
 
-		# In one word, describe... 
+		# Or, in one word, describe... 
 		prompts = [
 			"how this image makes you feel",
 			"the color you associate with this image",
 			"the layout or composition of the image",
 			"the subject depicted in this image",
-			"this image",
 			"what fruit this image would be, if it were a fruit",
 			"what name this image would have, if it had a name",
 			"the first thing that comes to mind when you see this image"
