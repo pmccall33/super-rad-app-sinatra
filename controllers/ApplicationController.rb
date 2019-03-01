@@ -55,7 +55,12 @@ class ApplicationController < Sinatra::Base
 
 	get '/test' do	
 		"reached test route"
-		binding.pry
+
+		if ENV['RACK_ENV'] == "development"
+			binding.pry
+		end
+
+		redirect '/'
 	end
 
 	get '*' do
