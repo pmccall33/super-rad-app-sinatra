@@ -1,6 +1,6 @@
-class ImageController < ApplicationController 
+class ImageController < ApplicationController
 
-	before ['/new', '/submit'] do 
+	before ['/new', '/submit'] do
 		if not (session[:logged_in] and session[:is_admin])
 			session[:message] = "You must be logged in as an administrator to do that!"
 			redirect '/admin/login'
@@ -8,37 +8,37 @@ class ImageController < ApplicationController
 	end
 
 
-	get '/' do 
-		# get a random image url from database  
-		rand_image = Image.all.sample 
+	get '/' do
+		# get a random image url from database
+		rand_image = Image.all.sample
 
 		@image_url = ""
 
-		if rand_image 
+		if rand_image
 			@image_url = rand_image.image_url
-			@image_id = rand_image.id 
-		end 
+			@image_id = rand_image.id
+		end
 
 		erb :show_image
 	end
 
 
-	get '/new' do 
-		erb :new_image 
+	get '/new' do
+		erb :new_image
 	end
 
 
-	post '/submit' do 
+	post '/submit' do
 		@image_url = params[:image_url]
 
 		erb :submit_image
 	end
 
 
-	post '/new' do 
-		image = Image.new 
+	post '/new' do
+		image = Image.new
 		image.image_url = params[:image_url]
-		image.save 
+		image.save
 
 		session[:message] = "Successfully added image!"
 
@@ -46,22 +46,24 @@ class ImageController < ApplicationController
 	end
 
 
-	post '/:id' do 
+	post '/:id' do
 		puts "#{params} are herereereeee!"
-		if (params[:tag] and params[:tag].length > 0)
-			new_tag = Tag.new 
-			new_tag.image_id = params[:id] 
-			new_tag.image_tag = params[:tag] 
+		unless (/[^A-z]+/ =~ params[:tag].strip)
+		# if (params[:tag] and params[:tag].length > 0)
+		console.log('this works')
+			new_tag = Tag.new
+			new_tag.image_id = params[:id]
+			new_tag.image_tag = params[:tag]
 
 			new_tag.save
-			session[:message] = "Successfully added your tag!" 
-		end 
+			session[:message] = "Successfully added your tag!"
+		end
 
 		redirect '/image'
 	end
 
 
-	post '/' do 
+	post '/' do
 		redirect '/'
 	end
 
