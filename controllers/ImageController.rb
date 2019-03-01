@@ -18,7 +18,8 @@ class ImageController < ApplicationController
 		prompts = [
 			"how this image makes you feel",
 			"the color you associate with this image",
-			"the layout or composition of the image"
+			"the layout or composition of the image",
+			"the subject depicted in this image"
 		]
 
 
