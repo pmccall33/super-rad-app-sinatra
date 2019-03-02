@@ -101,4 +101,22 @@ class UserAPIController < ApplicationController
 		end
 	end
 
+	get '/logout' do
+    	
+	    puts "#{session[:username]} session[:username] here"
+	    # checking for session in postman is giving some issues but it is hitting the route
+	    username = session[:username]
+
+	    session.destroy 
+
+	    response = {
+	      success: true,
+	      code: 200,
+	      status: "good",
+	      message: "#{session[:username]} is logged out."
+	    }
+
+	    response.to_json
+
+	end
 end
