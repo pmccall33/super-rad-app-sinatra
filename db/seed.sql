@@ -7,4 +7,7 @@ INSERT INTO images (image_url) VALUES ('https://upload.wikimedia.org/wikipedia/c
 INSERT INTO images (image_url) VALUES ('https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Finite_subdivision_of_a_radial_link.png/170px-Finite_subdivision_of_a_radial_link.png');
 INSERT INTO images (image_url) VALUES ('https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Fractal_Broccoli.jpg/280px-Fractal_Broccoli.jpg');
 INSERT INTO images (image_url) VALUES ('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Animated_fractal_mountain.gif/386px-Animated_fractal_mountain.gif');
-INSERT INTO images (image_url) VALUES ('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Diverse_torture_instruments.jpg/220px-Diverse_torture_instruments.jpg');
+INSERT INTO images (image_url) VALUES ('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Diverse_torture_instruments.jpg/220px-Diverse_torture_instruments.jpg'); 
+
+INSERT INTO user_path_steps (user_id, image_id, path_id, previous_step) VALUES 
+	('1', '1', '1', '0');

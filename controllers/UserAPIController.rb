@@ -11,7 +11,7 @@ class UserAPIController < ApplicationController
   	end
 
   	post '/test' do
-  		"TEst route reached"
+  		"you have reached the test post route here"
   		response = {
 				success: true,
 				code: 200,
