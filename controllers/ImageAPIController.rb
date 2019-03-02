@@ -32,26 +32,12 @@ class ImageAPIController < ApplicationController
 		response.to_json
   	end
 
-	get '/:id' do 
-		image = Image.find_by id: params[:id]				
-
-		@image_id = image.id
-		@image_url = image.image_url
-		
-		response = {
-			success: true,
-			code: 200,
-			status: "good",
-			message: "get rndom image route success",
-			image_id: @image_id,
-			image_url: @image_url
-		}
-		response.to_json
-	end
 
 	get '/random' do 
-		# get a random image url from database  
+		# get a random image url from database 
+		puts "You have hit the random route" 
 		rand_image = Image.all.sample 
+		# pp Image.all
 
 		@image_url = ""
 
@@ -71,6 +57,22 @@ class ImageAPIController < ApplicationController
 		response.to_json
 	end
 
+	get '/:id' do 
+		image = Image.find_by id: params[:id]				
+
+		@image_id = image.id
+		@image_url = image.image_url
+		
+		response = {
+			success: true,
+			code: 200,
+			status: "good",
+			message: "get image by :id route success",
+			image_id: @image_id,
+			image_url: @image_url
+		}
+		response.to_json
+	end
 
 	before ['/new', '/submit'] do 
 		if not (session[:logged_in] and session[:is_admin])
