@@ -37,13 +37,14 @@ map ('/api/v1/image') do
 	run ImageAPIController
 end
 
-map '/user_path' do
-	run UserPathStepController
-end
+# map '/user_path' do
+# 	run UserPathStepController
+# end
 
-map '/api/v1/user_path_step' do
+map ('/api/v1/user_path_step') do
 	run UserPathStepAPIController
 end
-map '/admin' do 
+
+map ('/admin') do 
 	run AdminController 
 end

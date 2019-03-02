@@ -24,7 +24,7 @@ CREATE TABLE tags(
 CREATE TABLE user_path_steps(
 	id SERIAL PRIMARY KEY,
 	user_id SERIAL REFERENCES users(id),
-	image_id SERIAL REFERENCES images(id),
-	path_id SERIAL,
-	previous_step SERIAL
+	image_id INTEGER REFERENCES images(id),
+	path_id INTEGER,
+	previous_step INTEGER
 );
