@@ -10,9 +10,6 @@ class ApplicationController < Sinatra::Base
 	# enable :sessions
 	secret = ENV['SESSION_SECRET']
 
-	"\nputs here is the seret"
-	puts secret
-
 	use Rack::Session::Cookie, :key => 'rack.session',
                                :path => '/',
     						   :secret => secret

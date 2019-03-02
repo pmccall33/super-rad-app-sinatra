@@ -32,24 +32,24 @@ class UserAPIController < ApplicationController
 			session[:logged_in] = true
 			session[:username] = user.username
 
-			# NEW CODE ===============
-			# CHECK IF ADMIN, SET PERMISSIONS VIA SESSIONS, CHANGE MESSAGE 
 			admin_message = ""
 
 			if user.is_admin 
 				session[:is_admin] = true 
 				admin_message = "administrator: "
 			end
-			# NEW CODE ===============
 
 			response = {
 				success: true,
 				code: 200,
 				status: "good",
 				message: "Logged in as #{admin_message}#{user.username}",
-				username: user.username
+				username: user.username,
+				userId: user.id,
+				is_admin: user.is_admin 
 			}
 			response.to_json
+
 		else
 			response = {
 				success: false,
@@ -70,25 +70,27 @@ class UserAPIController < ApplicationController
 			user = User.new
 			user.username = @payload[:username]
 			user.password = @payload[:password]
-			user.save
+			user.save 
 
 			session[:logged_in] = true
 			session[:username] = user.username
 			session[:is_admin] = user.is_admin
 
-			session[:message] = {
+			response = {
 				success: true,
 				code: 201,
 				status: "good",
 				message: "#{user.username} successfully created and loggin in.",
 				username: user.username,
+				userId: user.id,
 				is_admin: user.is_admin
 			}
 
 			response.to_json
 
 		else
-			session[:message] = {
+
+			response = {
 				success: true,
 				code: 200,
 				status: "bad",
