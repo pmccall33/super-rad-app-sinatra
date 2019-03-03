@@ -40,11 +40,7 @@ class ImageAPIController < ApplicationController
 
 		# @image_url = ""
 
-		@rand_image_arr = [rand_image1, rand_image2, rand_image3, rand_image4]
-		# if rand_image 
-		# 	@image_url = rand_image.image_url
-		# 	@image_id = rand_image.id 
-		# end 
+		@rand_image_arr = [rand_image1, rand_image2, rand_image3, rand_image4] 
 
 		response = {
 			success: true,
@@ -52,8 +48,6 @@ class ImageAPIController < ApplicationController
 			status: "good",
 			message: "get rndom image route success, returning array of images",
 			rand_image_arr: @rand_image_arr
-			# image_id: @image_id,
-			# image_url: @image_url
 		}
 		response.to_json
 	end
