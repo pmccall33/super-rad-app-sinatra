@@ -17,8 +17,8 @@ CREATE TABLE images(
 
 CREATE TABLE tags(
 	id SERIAL PRIMARY KEY,
-	image_id INTEGER REFERENCES images(id) ,
-	tag VARCHAR(32)
+	image_id INTEGER REFERENCES images(id),
+	image_tag VARCHAR(32)
 );
 
 CREATE TABLE user_path_steps(

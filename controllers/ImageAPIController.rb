@@ -114,7 +114,7 @@ class ImageAPIController < ApplicationController
 				selected_tags.push(this_image_tags.sample)
 
 				selected_tags.each do |tag| 
-					selected_just_tags.push(tag.tag)
+					selected_just_tags.push(tag.image_tag)
 				end
 
 				puts "SELECTED TAGS: "
@@ -124,7 +124,7 @@ class ImageAPIController < ApplicationController
 				related_images_ids = []
 
 				all_image_tags.each do |tag| 
-					if selected_just_tags.include? tag.tag
+					if selected_just_tags.include? tag.image_tag
 						related_images_ids.push tag.image_id
 					end
 				end
