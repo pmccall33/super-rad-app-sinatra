@@ -42,16 +42,18 @@ class ImageAPIController < ApplicationController
 		response.to_json
   	end
 
-	get '/random' do
+	get '/random/:num' do
 		# get a random image url from database
-		rand_image1 = Image.all.sample
-		rand_image2 = Image.all.sample
-		rand_image3 = Image.all.sample
-		rand_image4 = Image.all.sample
 
-		# @image_url = ""
+		all_images = Image.all 
 
-		@rand_image_arr = [rand_image1, rand_image2, rand_image3, rand_image4] 
+		num_images = params[:num].to_i
+
+		@rand_image_arr = []
+
+		num_images.times do |i| 
+			@rand_image_arr.push(all_images.sample)
+		end
 
 		response = {
 			success: true,
@@ -71,6 +73,7 @@ class ImageAPIController < ApplicationController
 
 		puts "ALL_IMAGE_TAGS: "
 		print all_image_tags
+		puts " "
 
 		if !all_image_tags || all_image_tags.length == 0 
 			response = {
@@ -103,23 +106,33 @@ class ImageAPIController < ApplicationController
 			else
 
 				selected_tags = []
+				selected_just_tags = []
 
 				selected_tags.push(this_image_tags.sample)
 				selected_tags.push(this_image_tags.sample)
 				selected_tags.push(this_image_tags.sample)
 				selected_tags.push(this_image_tags.sample)
+
+				selected_tags.each do |tag| 
+					selected_just_tags.push(tag.tag)
+				end
 
 				puts "SELECTED TAGS: "
 				print selected_tags
+				puts " "	
 
 				related_images_ids = []
 
 				all_image_tags.each do |tag| 
-					if selected_tags.include? tag.tag
+					if selected_just_tags.include? tag.tag
 						related_images_ids.push tag.image_id
 					end
 				end
 
+				puts "RELATED IMAGES IDS: "
+				print related_images_ids
+				puts " "
+				
 				if !related_images_ids or related_images_ids.length == 0 
 					response = {
 						success: false,
@@ -141,8 +154,13 @@ class ImageAPIController < ApplicationController
 
 					puts "SELECTED IMAGES IDS: "
 					print selected_images_ids
+					puts " "
+					
+					@image_arr = Image.find(selected_images_ids)
 
-					@image_arr = Images.find(selected_images_ids)
+					puts "IMAGE ARRAY: "
+					print @image_arr 
+					puts " "
 
 					response = {
 						success: true,
