@@ -53,10 +53,15 @@ class UserPathStepAPIController < ApplicationController
 		puts "reached UserPathStepAPIController /all route"
 		# if (session[:logged_in] = true and session[:username] = user.username)
 			puts "#{params} <=== params from /all are here"
+
+			puts "#{params[:id]} <=== params[:id] from /all are here"
+	
 			path_id = params[:id]
-			# @user_path = UserPathStep.find_by path_id: params[:id]
-			@user_path_arr = UserPathStep.find_each do |x|
-				x == path_id
+			# puts "#{path_id} path_id hreerererererer"
+			@user_path = UserPathStep.find_by path_id: params[:id]
+			# @user_path_arr = UserPathStep.find_each path_id: params[:id]
+			@user_path_arr = UserPathStep.find_each do |step|
+				step == path_id
 			end
 		# end
 		response = {
