@@ -65,6 +65,23 @@ class ImageAPIController < ApplicationController
 		response.to_json
 	end
 
+	get '/:id' do
+		image = Image.find_by id: params[:id]
+
+		@image_id = image.id
+		@image_url = image.image_url
+
+		response = {
+			success: true,
+			code: 200,
+			status: "good",
+			message: "get image by :id route success",
+			image_id: @image_id,
+			image_url: @image_url
+		}
+		response.to_json
+	end
+
 	before ['/new', '/submit'] do
 		if not (session[:logged_in] and session[:is_admin])
 			session[:message] = "You must be logged in as an administrator to do that!"
