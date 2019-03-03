@@ -1,5 +1,16 @@
 class ImageAPIController < ApplicationController
 
+	# ======================
+	# ADMIN FILTER: 
+	before ['/new', '/submit'] do
+		if not (session[:logged_in] and session[:is_admin])
+			session[:message] = "You must be logged in as an administrator to do that!"
+			redirect '/admin/login'
+		end
+	end
+	# ======================
+
+
 	before do
     if request.post?
 			payload_body = request.body.read
@@ -53,43 +64,104 @@ class ImageAPIController < ApplicationController
 	end
 
 	get '/:id' do
-		image = Image.find_by id: params[:id]
-		@image_id = image.id
-		@image_url = image.image_url
-		response = {
-			success: true,
-			code: 200,
-			status: "good",
-			message: "get image by :id returns",
-			image_id: @image_id,
-			image_url: @image_url
-		}
-		response.to_json
-	end
 
-	get '/:id' do
 		image = Image.find_by id: params[:id]
 
-		@image_id = image.id
-		@image_url = image.image_url
+		all_image_tags = Tag.all
 
-		response = {
-			success: true,
-			code: 200,
-			status: "good",
-			message: "get image by :id route success",
-			image_id: @image_id,
-			image_url: @image_url
-		}
-		response.to_json
-	end
+		puts "ALL_IMAGE_TAGS: "
+		print all_image_tags
 
-	before ['/new', '/submit'] do
-		if not (session[:logged_in] and session[:is_admin])
-			session[:message] = "You must be logged in as an administrator to do that!"
-			redirect '/admin/login'
+		if !all_image_tags || all_image_tags.length == 0 
+			response = {
+				success: false,
+				code: 200,
+				status: "bad",
+				message: "no tags",
+			}
+
+			response.to_json
+		else 
+
+			this_image_tags = []
+
+			all_image_tags.each do |tag|
+				if tag.image_id == image.id 
+					this_image_tags.push(tag)
+				end
+			end
+
+			if !this_image_tags or this_image_tags.length == 0 
+				response = {
+					success: false,
+					code: 200,
+					status: "bad",
+					message: "no tags for that image",
+				}
+
+				response.to_json
+			else
+
+				selected_tags = []
+
+				selected_tags.push(this_image_tags.sample)
+				selected_tags.push(this_image_tags.sample)
+				selected_tags.push(this_image_tags.sample)
+				selected_tags.push(this_image_tags.sample)
+
+				puts "SELECTED TAGS: "
+				print selected_tags
+
+				related_images_ids = []
+
+				all_image_tags.each do |tag| 
+					if selected_tags.include? tag.tag
+						related_images_ids.push tag.image_id
+					end
+				end
+
+				if !related_images_ids or related_images_ids.length == 0 
+					response = {
+						success: false,
+						code: 200,
+						status: "bad",
+						message: "no related image ids for that tag",
+					}
+
+					response.to_json				
+
+				else 
+
+				selected_images_ids = []
+
+					selected_images_ids.push(related_images_ids.sample)
+					selected_images_ids.push(related_images_ids.sample)
+					selected_images_ids.push(related_images_ids.sample)
+					selected_images_ids.push(related_images_ids.sample)
+
+					puts "SELECTED IMAGES IDS: "
+					print selected_images_ids
+
+					@image_arr = Images.find(selected_images_ids)
+
+					response = {
+						success: true,
+						code: 200,
+						status: "good",
+						message: "returning array of selected images",
+						image_arr: @image_arr
+					}
+
+					response.to_json
+				end
+			end
 		end
 	end
+
+
+
+	# ===========================================
+	# ADMIN STUFF 
 
 	get '/new' do
 		erb :new_image
