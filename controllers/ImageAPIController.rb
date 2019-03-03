@@ -36,23 +36,29 @@ class ImageAPIController < ApplicationController
 	get '/random' do 
 		# get a random image url from database 
 		puts "You have hit the random route" 
-		rand_image = Image.all.sample 
+		rand_image1 = Image.all.sample
+		rand_image2 = Image.all.sample
+		rand_image3 = Image.all.sample
+		rand_image4 = Image.all.sample
+
 		# pp Image.all
+		@rand_image_arr = [rand_image1, rand_image2, rand_image3, rand_image4]
 
 		@image_url = ""
 
-		if rand_image 
-			@image_url = rand_image.image_url
-			@image_id = rand_image.id 
-		end 
+		# if rand_image 
+		# 	@image_url = rand_image.image_url
+		# 	@image_id = rand_image.id 
+		# end 
 
 		response = {
 			success: true,
 			code: 200,
 			status: "good",
-			message: "get rndom image route success",
-			image_id: @image_id,
-			image_url: @image_url
+			message: "get rndom image route success, sending back an array of four images",
+			rand_image_arr: @rand_image_arr,
+			# image_id: @image_id,
+			# image_url: @image_url
 		}
 		response.to_json
 	end
