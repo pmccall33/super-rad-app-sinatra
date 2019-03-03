@@ -49,6 +49,27 @@ class UserPathStepAPIController < ApplicationController
 		response.to_json
 	end
 
+	get '/:id/all' do
+		puts "reached UserPathStepAPIController /all route"
+		# if (session[:logged_in] = true and session[:username] = user.username)
+			puts "#{params} <=== params from /all are here"
+			path_id = params[:id]
+			# @user_path = UserPathStep.find_by path_id: params[:id]
+			@user_path_arr = UserPathStep.find_each do |x|
+				x == path_id
+			end
+		# end
+		response = {
+			success: true,
+			code: 200,
+			status: "good",
+			message: "Successfully found #{@user_path_arr}",
+			user_path: @user_path_arr
+		}
+		response.to_json
+
+	end
+
   	get '/:id' do 
 		
   		if (session[:logged_in] = true and session[:username] = user.username)
