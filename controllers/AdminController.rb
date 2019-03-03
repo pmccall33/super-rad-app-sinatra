@@ -38,7 +38,7 @@ class AdminController < ApplicationController
 		puts "params are hererererereereeeeee------"
 		puts "#{params}"
 		# if not (admin and admin.authenticate(pw) and admin.is_admin)
-		if not (admin and admin.authenticate(pw) and admin.is_admin)
+		if not (admin and authenticate(pw) and admin.is_admin)
 			session[:message] = "Failed to log in as administrator"
 			redirect '/admin/login'
 		else 

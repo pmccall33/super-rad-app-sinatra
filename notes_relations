@@ -1,0 +1,59 @@
+# Relations
+
+## User has one User_Path
+ ## User_Path belongs to User
+
+## User has many Saved_User_Paths
+ ## Saved_User_Paths belong to User
+
+## User_Path has many Images
+ ## Images belong to User_Path
+
+##
+
+# Models
+
+## User Model
+
+### has_one User_Path_Steps
+### has_many Saved_User_Paths
+
+### id SERIAL PRIMARY KEY
+### username VARCHAR(32)
+### password VARCHAR(60)
+### path_id INTEGER REFERENCES user_path_steps(id)
+
+## User_Path_Steps Model
+
+### belongs to User
+### id SERIAL PRIMARY KEY
+### user_id INTEGER REFERENCES users(id)
+### image_id INTEGER REFERENCES images(id)
+### previous_step INTEGER
+
+## Image Model
+
+### id SERIAL PRIMARY KEY
+### url VARCHAR(255)
+
+## Path Model
+
+### id SERIAL PRIMARY KEY
+### user_id INTEGER REFERENCES users(id)
+### origin_step INTEGER REFERENCES //TODO :"....."
+### fork? BOOLEAN
+
+## Tags Model
+
+### id SERIAL PRIMARY KEY
+### image_id INTEGER REFERNCES images(id)
+### image_tag VARCHAR(30)
+
+
+
+
+
+
+
+
+

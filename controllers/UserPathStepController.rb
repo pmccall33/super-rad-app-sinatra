@@ -18,8 +18,4 @@ class UserPathStepController < ApplicationController
 
 		erb :user_path
 	end
-
-
-
-
 end
