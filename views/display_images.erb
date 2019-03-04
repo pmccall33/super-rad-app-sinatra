@@ -8,12 +8,24 @@
 <hr>
 
 <h3>Found Images</h3>
+<a href="/image/find"> Back to Find Images </a>
 
+<% if @images and @images.length > 0 and @images[0] %>
 <% @images.each do |image| %>
+	<hr>
 	<p>Image ID: <%=image.id%> </p>
 	<form action="/image/destroy/<%=image.id%>" method="POST">
 		<button>DESTROY</button>
 		<input hidden name="_method" value="DELETE">
 	</form>
 	<img class="thumbnail" src="<%=image.image_url%>" /> 
+	<hr>
+	<br />
 <% end %>
+<% else %>
+	<hr>
+	<h4> No images found matching your query </h4>
+	<hr> 
+<% end %>
+
+<a href="/image/find"> Back to Find Images </a>
