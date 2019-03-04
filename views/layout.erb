@@ -11,9 +11,9 @@
 			<strong><p>Admin: <%= session[:username] %></p></strong>
 		<% end %>
 			<% if session[:logged_in] and session[:is_admin] %>
-				<a href="/image/new">Add Image</a> 
-				<a href="/admin/logout">Logout</a> 
+				<a href="/image/new">Admin Control Panel</a> 
 				<a href="/admin/register">Admin: Register</a>
+				<a href="/admin/logout">Logout</a> 
 			<% else %>
 				<a href="/admin/login">Admin: Log In</a>
 			<% end %>

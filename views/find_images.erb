@@ -1,0 +1,23 @@
+<!-- display images:  POST: "/image/display" -->
+
+<h2> ADMINISTRATOR CONTROL PANEL </h2>
+<hr>
+	<div class="controlPanel">
+		<a href="/image/new">Add Images</a>
+		<a href="/image/find">Find Images</a>
+	</div>
+<hr>
+
+<h3>FIND IMAGES</h3>
+
+<h4>Search by Image ID:</h4>
+<form action="/image/display" method="POST">
+	<input type="text" name="id" value="" placeholder="Enter image id...">
+	<button>Search</button>
+</form>
+
+<h4>Search by Image URL substring:</h4>
+<form>	
+	<input type="text" name="query" value="" placeholder="Enter image query...">
+	<button>Search</button>
+</form>

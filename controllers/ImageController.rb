@@ -1,6 +1,6 @@
 class ImageController < ApplicationController
 
-	before ['/new', '/submit'] do
+	before ['/new', '/submit', '/destroy', '/find', '/display'] do
 		if not (session[:logged_in] and session[:is_admin])
 			session[:message] = "You must be logged in as an administrator to do that!"
 			redirect '/admin/login'
@@ -60,6 +60,21 @@ class ImageController < ApplicationController
 	end
 
 
+	post '/' do
+		redirect '/'
+	end
+
+
+	get '/find' do 
+		erb :find_images 
+	end
+
+
+	post '/display' do 
+		erb :display_images
+	end
+
+
 	post '/:id' do
 
 		puts "params are here: "
@@ -86,10 +101,4 @@ class ImageController < ApplicationController
 		session[:message] = "Thank you for the input!"
 		redirect '/image'
 	end
-
-
-	post '/' do
-		redirect '/'
-	end
-
 end
