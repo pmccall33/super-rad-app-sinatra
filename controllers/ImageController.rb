@@ -7,7 +7,6 @@ class ImageController < ApplicationController
 		end
 	end
 
-
 	get '/' do
 		# get a random image url from database
 		rand_image = Image.all.sample
@@ -71,7 +70,67 @@ class ImageController < ApplicationController
 
 
 	post '/display' do 
+		
+		puts "paramsID: "
+		pp params[:id]
+
+		puts "params url query: "
+		pp params[:query]
+
+
+		if params[:id]  
+			@images = [Image.find(params[:id])]
+		end
+
+		if params[:query] 
+
+			all_images = Image.all 
+
+			@images = [] 
+
+			all_images.each do |image| 
+				if image.image_url.include?(params[:query])  
+					@images.push(image)
+				end
+			end
+		end
+
+		puts "@images: "
+		pp @images 
+		puts " "
+
 		erb :display_images
+	end
+
+
+	# get "/bad_image" do
+	# 	puts "bad_image route reached"
+	# 	puts "=====all Images"
+	# 	@all_images = Image.all
+
+	# 	response = {
+	# 		success: true,
+	# 		code: 200,
+	# 		status: "good",
+	# 		message: "get bad_image route and response",
+	# 		images: @all_images
+	# 	}
+	# 	response.to_json
+	# end
+
+	delete '/destroy/:id' do 
+
+		puts "DELETE ROUTE HIT: "
+		puts "Delete image ${params[:id]}" 
+
+		# below code caused error message we couldn't bugfix -- NLS 
+		# ================================================
+		# image_to_delete = Image.find(params[:id].to_i)
+
+		# image_to_delete.destroy 
+		# ================================================
+		
+		redirect '/image/find'
 	end
 
 

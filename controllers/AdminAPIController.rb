@@ -29,22 +29,6 @@ class AdminAPIController < ApplicationController
 		redirect '/'
 	end
 
-
-	get "/bad_image" do
-		puts "bad_image route reached"
-		puts "=====all Images"
-		@all_images = Image.all
-
-		response = {
-			success: true,
-			code: 200,
-			status: "good",
-			message: "get bad_image route and response",
-			images: @all_images
-		}
-		response.to_json
-	end
-
 	post '/login' do 
 		
 		admin = User.find_by username: params[:username]

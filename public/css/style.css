@@ -60,3 +60,9 @@ img {
 	justify-content: space-around;
 	align-items: center;
 }
+
+.thumbnail {
+	max-height: 100px;
+	max-width: 100px;
+	display: block;
+}

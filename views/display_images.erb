@@ -8,3 +8,12 @@
 <hr>
 
 <h3>Found Images</h3>
+
+<% @images.each do |image| %>
+	<p>Image ID: <%=image.id%> </p>
+	<form action="/image/destroy/<%=image.id%>" method="POST">
+		<button>DESTROY</button>
+		<input hidden name="_method" value="DELETE">
+	</form>
+	<img class="thumbnail" src="<%=image.image_url%>" /> 
+<% end %>
