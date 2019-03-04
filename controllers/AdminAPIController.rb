@@ -1,4 +1,4 @@
-class AdminController < ApplicationController	
+class AdminAPIController < ApplicationController	
 
 	before ['/register'] do 
 		if not (session[:logged_in] and session[:is_admin])
@@ -27,6 +27,22 @@ class AdminController < ApplicationController
 		session.destroy 
 		session[:message] = "Logged out"
 		redirect '/'
+	end
+
+
+	get "/bad_image" do
+		puts "bad_image route reached"
+		puts "=====all Images"
+		@all_images = Image.all
+
+		response = {
+			success: true,
+			code: 200,
+			status: "good",
+			message: "get bad_image route and response",
+			images: @all_images
+		}
+		response.to_json
 	end
 
 	post '/login' do 
