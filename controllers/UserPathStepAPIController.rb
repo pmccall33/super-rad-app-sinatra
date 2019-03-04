@@ -75,11 +75,13 @@ class UserPathStepAPIController < ApplicationController
 			@user_path_arr = []
 			@path_id = params[:id]
 
-			UserPathStep.find_each(:path_id => "path_id == #{@path_id}") do |path_id|
+			UserPathStep.find_each do |path_id|
 				puts "here are find_each vars ============"
 				puts "#{path_id} path_id"
 				puts "#{params[:id]} params[:id] is herrererere"
-				@user_path_arr.push(path_id)
+				if path_id == params[:id]
+					@user_path_arr.push(path_id)
+				end
 			end
 
 			puts "@user_path_arr"
