@@ -17,13 +17,13 @@ CREATE TABLE images(
 
 CREATE TABLE tags(
 	id SERIAL PRIMARY KEY,
-	image_id INTEGER REFERENCES images(id),
+	image_id INTEGER REFERENCES images(id) ON DELETE CASCADE,
 	image_tag VARCHAR(32)
 );
 
 CREATE TABLE user_path_steps(
 	id SERIAL PRIMARY KEY,
-	user_id SERIAL REFERENCES users(id),
+	user_id INTEGER REFERENCES users(id),
 	image_id INTEGER REFERENCES images(id),
 	path_id INTEGER,
 	previous_step INTEGER

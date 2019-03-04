@@ -77,16 +77,16 @@ class ImageController < ApplicationController
 		puts "params url query: "
 		pp params[:query]
 
+		@images = [] 
 
 		if params[:id]  
-			@images = [Image.find(params[:id])]
+			image = Image.find_by id: params[:id]
+			@images.push(image)
 		end
 
 		if params[:query] 
 
 			all_images = Image.all 
-
-			@images = [] 
 
 			all_images.each do |image| 
 				if image.image_url.include?(params[:query])  
@@ -125,9 +125,9 @@ class ImageController < ApplicationController
 
 		# below code caused error message we couldn't bugfix -- NLS 
 		# ================================================
-		# image_to_delete = Image.find(params[:id].to_i)
+		image_to_delete = Image.find(params[:id].to_i)
 
-		# image_to_delete.destroy 
+		image_to_delete.destroy 
 		# ================================================
 		
 		redirect '/image/find'
