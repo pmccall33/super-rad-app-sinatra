@@ -53,11 +53,37 @@ class UserPathStepAPIController < ApplicationController
 		puts "reached UserPathStepAPIController /all route"
 		# if (session[:logged_in] = true and session[:username] = user.username)
 			puts "#{params} <=== params from /all are here"
-			path_id = params[:id]
-			# @user_path = UserPathStep.find_by path_id: params[:id]
-			@user_path_arr = UserPathStep.find_each do |x|
-				x == path_id
+
+			puts "#{params[:id]} <=== params[:id] from /all are here"
+			# puts "#{UserPathStep.path_id}"
+			# path_id = params[:id]
+			# puts "#{path_id} path_id hreerererererer"
+			@user_path = UserPathStep.find_by path_id: params[:id]
+			# @user_path_arr = UserPathStep.find_each path_id: params[:id]
+			# @user_path_arr = UserPathStep.find_each do |step|
+			# 	step == path_id
+			# end
+				 # Person.find_each(:conditions => "age > 21") do |person|
+				 #    person.party_all_night!
+				 #  end
+			# @user_path_arr = UserPathStep.find_each(:path_id => params[:id]) do |step|
+
+			# end
+
+			# @user_path_arr = UserPathStep.find_each { |path_id| path_id == params[:id] }
+
+			@user_path_arr = []
+			@path_id = params[:id]
+
+			UserPathStep.find_each(:path_id => "path_id == #{@path_id}") do |path_id|
+				puts "here are find_each vars ============"
+				puts "#{path_id} path_id"
+				puts "#{params[:id]} params[:id] is herrererere"
+				@user_path_arr.push(path_id)
 			end
+
+			puts "@user_path_arr"
+			pp @user_path_arr
 		# end
 		response = {
 			success: true,

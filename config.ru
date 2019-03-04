@@ -9,6 +9,7 @@ require './controllers/UserPathStepAPIController'
 require './controllers/ImageController'
 require './controllers/ImageAPIController'
 require './controllers/AdminController'
+require './controllers/AdminAPIController'
 
 #models
 require './models/UserModel'
@@ -49,3 +50,10 @@ end
 map ('/admin') do
 	run AdminController
 end
+
+map ('/api/v1/admin') do
+	run AdminAPIController
+end
+
+
+
