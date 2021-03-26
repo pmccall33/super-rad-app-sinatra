@@ -14,7 +14,8 @@ stores images and tags in a SQL database.
 - Show visualization of the Global App 'State-o-the-Struct' and allow for delta time animations of relational changes represented in relative distance vectors.
 
 
-## Image Tagger 
+## Image Tagger: 
+https://super-rad-image-tagger.herokuapp.com/
 #### 'Helper app' for *super_rad* 
  - A mini app to crowd-source paired keywords with randomized images in order to seed the database to provide useful relational data to main *super_rad* app where users can click through a visual story.
 
